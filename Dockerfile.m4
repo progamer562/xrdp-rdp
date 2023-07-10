@@ -310,6 +310,8 @@ m4_ifelse(ENABLE_NVIDIA_SUPPORT, 1, [[m4_dnl
 # Add Mozilla Team repository
 RUN curl --proto '=https' --tlsv1.3 -sSf 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x0AB215679C571D1C8325275B9BDB3D89CE49EC21' | gpg --dearmor -o /etc/apt/trusted.gpg.d/mozillateam.gpg \
 	&& printf '%s\n' "deb [signed-by=/etc/apt/trusted.gpg.d/mozillateam.gpg] https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/mozillateam.list
+RUN curl wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+RUN add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
 
 # Install extra packages
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -327,7 +329,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		engrampa \
 		exo-utils \
 		file \
-		firefox \
+		microsoft-edge \
+                filezilla \
 		fonts-dejavu \
 		fonts-liberation \
 		fonts-noto \
